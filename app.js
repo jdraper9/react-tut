@@ -64,7 +64,20 @@ const server = app.listen(8000, () => console.log('Server stated on http://local
 
 // register "Articles" model into app file
 
-mongoose.connect
+mongoose.connect('mongodb://localhost/lightblog');
+mongoose.set('debug', true);
+
+// Add models
+require('./models/Articles');
+// Add routes
+
+app.use((req, res, next) => {
+	const err = new Error('Not Found');
+	err.status = 404;
+	next(err);
+});
+
+
 
 
 
